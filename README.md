@@ -11,6 +11,15 @@ A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony
 5. Run `docker compose down --remove-orphans` to stop and remove the Docker containers.
 6. Run `docker compose logs -f` to display current logs, `docker compose logs -f [CONTAINER_NAME]` to display specific container's current logs 
 
+## Adminer
+1. Navigate to [http://localhost:8080](http://localhost:8080)
+2. Use the following credentials:
+    - System: `PostgreSQL` 
+    - Server: `database`
+    - Username: `symfony`
+    - Password: `ChangeMe`
+    - Database: `app`
+
 ## Commands
 
 ```shell
