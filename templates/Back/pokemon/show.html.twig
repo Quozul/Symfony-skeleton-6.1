@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PokemonController!{% endblock %}
+
+{% block body %}
+    <a href="{{ path('back_pokemon') }}">Back</a><br/>
+    {{ pokemon.name }} - {{ pokemon.description }}<br/>
+    <a href="{{ path('back_edit_pokemon', {'id': pokemon.id}) }}">Edit Pokemon</a><br/>
+    <a href="{{ path('back_delete_pokemon', {'id': pokemon.id, 'token': csrf_token('remove' ~ pokemon.id)}) }}">Delete Pokemon</a>
+{% endblock %}

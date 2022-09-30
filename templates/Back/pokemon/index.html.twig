@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PokemonController!{% endblock %}
+
+{% block body %}
+    {% for pokemon in pokemons %}
+        <a href="{{ path('back_show_pokemon', {'id': pokemon.id}) }}">
+            {{ pokemon.name }} - {{ pokemon.description }}<br/>
+        </a>
+        <br/>
+    {% endfor %}
+    <a href="{{ path('back_create_pokemon') }}">Create Pokemon</a>
+{% endblock %}
