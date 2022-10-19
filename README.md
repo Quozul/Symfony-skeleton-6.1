@@ -20,6 +20,11 @@ A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony
     - Password: `ChangeMe`
     - Database: `app`
 
+## Pages of this project
+
+- [List Pokemons](https://localhost/admin/pokemon)
+- [List types](https://localhost/admin/type)
+
 ## Commands
 
 ```shell
@@ -52,4 +57,10 @@ con doctrine:database:drop
 
 # List all routes
 con debug:route
+
+# Create a use
+con make:user
+
+# Create an authenticator
+con make:auth
 ```

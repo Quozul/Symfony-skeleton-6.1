@@ -8,3 +8,7 @@ back_controllers:
     type: attribute
     prefix: /admin/
     name_prefix: back_
+
+root_controllers:
+    resource: ../src/Controller
+    type: attribute
