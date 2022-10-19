@@ -24,6 +24,7 @@ A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony
 
 - [List Pokemons](https://localhost/admin/pokemon)
 - [List types](https://localhost/admin/type)
+- [Login](https://localhost/login)
 
 ## Commands
 
@@ -63,4 +64,7 @@ con make:user
 
 # Create an authenticator
 con make:auth
+
+# Hash a string
+con security:hash
 ```
