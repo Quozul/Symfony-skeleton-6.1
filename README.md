@@ -49,4 +49,7 @@ con doctrine:database:create
 
 # Drop database
 con doctrine:database:drop
+
+# List all routes
+con debug:route
 ```
