@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Pokemon;
+use App\Entity\Type;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,7 +15,12 @@ class PokemonType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description');
+            ->add('description')
+            ->add('type', EntityType::class, [
+                'class' => Type::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
