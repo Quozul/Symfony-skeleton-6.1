@@ -5,6 +5,7 @@ namespace App\Controller\Back;
 use App\Entity\Type;
 use App\Form\TypeType;
 use App\Repository\TypeRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,8 +18,17 @@ class TypeController extends AbstractController
     public function index(TypeRepository $typeRepository): Response
     {
         return $this->render('Back/type/index.html.twig', [
-            'types' => $typeRepository->findAll(),
+            'types' => $typeRepository->findBy([], ['position' => 'ASC']),
         ]);
+    }
+
+    #[Route('/{id}/{sortable}', name: 'type_sortable', requirements: ['id' => '\d+', 'sortable' => 'UP|DOWN'], methods: ['GET'])]
+    public function sortable(Type $type /* ParamConverter */, string $sortable, EntityManagerInterface $manager): Response
+    {
+        $move = $sortable === 'UP' ? -1 : 1;
+        $type->setPosition($type->getPosition() + $move);
+        $manager->flush();
+        return $this->redirectToRoute('type_index');
     }
 
     #[Route('/new', name: 'type_new', methods: ['GET', 'POST'])]
@@ -69,7 +79,7 @@ class TypeController extends AbstractController
     #[Route('/{id}', name: 'type_delete', methods: ['POST'])]
     public function delete(Request $request, Type $type, TypeRepository $typeRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$type->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $type->getId(), $request->request->get('_token'))) {
             $typeRepository->remove($type, true);
         }
 

@@ -21,6 +21,8 @@
                 <td>
                     <a href="{{ path('back_type_show', {'id': type.id}) }}">show</a>
                     <a href="{{ path('back_type_edit', {'id': type.id}) }}">edit</a>
+                    <a href="{{ path('back_type_sortable', {'id': type.id, 'sortable': 'UP'}) }}">UP</a>
+                    <a href="{{ path('back_type_sortable', {'id': type.id, 'sortable': 'DOWN'}) }}">DOWN</a>
                 </td>
             </tr>
         {% else %}

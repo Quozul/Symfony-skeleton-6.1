@@ -6,6 +6,7 @@ use App\Repository\TypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\SortablePosition;
 
 #[ORM\Entity(repositoryClass: TypeRepository::class)]
 class Type
@@ -20,6 +21,10 @@ class Type
 
     #[ORM\ManyToMany(targetEntity: Pokemon::class, mappedBy: 'type')]
     private Collection $pokemon;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[SortablePosition]
+    private ?int $position = null;
 
     public function __construct()
     {
@@ -68,5 +73,21 @@ class Type
         }
 
         return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param int|null $position
+     */
+    public function setPosition(?int $position): void
+    {
+        $this->position = $position;
     }
 }
