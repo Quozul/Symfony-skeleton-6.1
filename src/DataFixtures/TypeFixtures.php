@@ -2,19 +2,19 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Nature;
+use App\Entity\Type;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
-class NatureFixtures extends Fixture
+class TypeFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
 
-        for ($i = 0; $i < 50; $i++) {
-            $object = (new Nature())
+        for ($i = 0; $i < 10; $i++) {
+            $object = (new Type())
                 ->setName($faker->word);
             $manager->persist($object);
         }

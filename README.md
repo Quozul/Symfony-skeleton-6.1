@@ -76,4 +76,8 @@ con d:f:l -n
 
 # Install `faker` package
 docker compose exec php composer require fakerphp/faker --dev
+
+# https://github.com/doctrine-extensions/DoctrineExtensions
+docker compose exec php composer require stof/doctrine-extensions-bundle
+# Answer "Y" to the question asked during the installation process
 ```
