@@ -67,4 +67,13 @@ con make:auth
 
 # Hash a string
 con security:hash
+
+# Install `orm-fixtures` package
+docker compose exec php composer require orm-fixtures --dev
+
+# Update fixtures and purge database
+con d:f:l -n
+
+# Install `faker` package
+docker compose exec php composer require fakerphp/faker --dev
 ```
