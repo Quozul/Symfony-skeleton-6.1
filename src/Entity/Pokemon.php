@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PokemonRepository::class)]
 class Pokemon
@@ -21,9 +22,13 @@ class Pokemon
     private ?int $id = null;
 
     #[ORM\Column(length: 64)]
+    #[Assert\NotBlank(message: 'Le nom ne peut pas être vide')]
+    #[Assert\Type('string', message: 'Type de données invalide')]
+    #[Assert\Length(max: 64, maxMessage: 'Nom trop long')]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Type('string', message: 'Type de données invalide')]
     private ?string $description = null;
 
     #[ORM\Column(length: 55)]
