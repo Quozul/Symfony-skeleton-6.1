@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Security;
+
 use App\Entity\Statistics;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -10,7 +12,7 @@ class UserVoter extends Voter {
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        if (!in_array($attribute, [self::VIEW])) {
+        if ($attribute != self::VIEW) {
             return false;
         }
 

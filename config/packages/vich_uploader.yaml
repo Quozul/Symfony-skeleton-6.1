@@ -1,0 +1,10 @@
+vich_uploader:
+    db_driver: orm
+
+    metadata:
+        type: attribute
+
+    mappings:
+        pokemons:
+            uri_prefix: /images/pokemons
+            upload_destination: '%kernel.project_dir%/public/images/pokemons'

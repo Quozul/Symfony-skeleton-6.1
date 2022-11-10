@@ -7,4 +7,5 @@
     {{ pokemon.name }} - {{ pokemon.description }}<br/>
     <a href="{{ path('back_edit_pokemon', {'id': pokemon.id}) }}">Edit Pokemon</a><br/>
     <a href="{{ path('back_delete_pokemon', {'id': pokemon.id, 'token': csrf_token('remove' ~ pokemon.id)}) }}">Delete Pokemon</a>
+    <img src="{{ vich_uploader_asset(pokemon, 'imageFile') }}" alt="{{ pokemon.name }}">
 {% endblock %}

@@ -9,9 +9,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: PokemonRepository::class)]
+#[UniqueEntity(fields: 'name', message: 'Ce pokemon semble déjà exister')]
+#[Vich\Uploadable]
 class Pokemon
 {
     use TimestampableTrait;
@@ -40,6 +44,28 @@ class Pokemon
 
     #[ORM\ManyToOne(inversedBy: 'pokemon')]
     private ?Nature $nature = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
+    #[Vich\UploadableField(mapping: 'pokemons', fileNameProperty: 'image')]
+    #[Assert\Image]
+    private mixed $imageFile;
+
+    public function setImageFile(mixed $imageFile = null)
+    {
+        $this->imageFile = $imageFile;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($imageFile) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+
+        return $this;
+    }
 
     public function __construct()
     {
@@ -125,5 +151,29 @@ class Pokemon
     public function setSlug(?string $slug): void
     {
         $this->slug = $slug;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string|null $image
+     */
+    public function setImage(?string $image): void
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageFile(): mixed
+    {
+        return $this->imageFile;
     }
 }
