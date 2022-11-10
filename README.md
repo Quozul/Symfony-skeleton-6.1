@@ -82,4 +82,6 @@ docker compose exec php composer require stof/doctrine-extensions-bundle
 # Answer "Y" to the question asked during the installation process
 
 docker compose exec php composer require symfony/validator
+
+docker compose exec php composer require vich/uploader-bundle
 ```
